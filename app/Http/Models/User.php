@@ -11,8 +11,19 @@ class User extends Model
     protected $primaryKey = 'id';
 
     public function addUser($values){
-    	//dd('usermodel');
-    	DB::table($this->table)->insert($values);
-    	dd('success');
+    	//dd($values);
+    	$data = [
+    		'name' => $values['name'],
+    		'user_name' => $values['user_name'],
+    		'email' => $values['email'],
+    		'password' => $values['password'],
+    		'gender' => $values['gender'],
+    		'date_of_birth' => $values['date_of_birth'],
+    		'country' => $values['country'],
+    		'profile_image' => $values['profile_image']
+    	];
+    	//dd($data);
+    	return DB::table($this->table)->insert($data);
+    	//dd('success');
     }
 }

@@ -15,9 +15,10 @@
 //     //return $router->app->version();
 //     echo "hello";
 // });
-
-$router->post('/adduser','UsersController@addUser');
-$router->get('/users','UsersController@getUsers');
-$router->get('/user/{id}','UsersController@getUser');
-$router->delete('/user/{id}','UsersController@destroyUser');
-$router->put('/user/{id}','UsersController@updateUser');
+$router->group(['middleware' => ['apiAuth']],function() use ($router){
+	$router->post('/adduser','UsersController@addUser');
+	$router->get('/users','UsersController@getUsers');
+	$router->get('/user/{id}','UsersController@getUser');
+	$router->delete('/user/{id}','UsersController@destroyUser');
+	$router->put('/user/{id}','UsersController@updateUser');
+});

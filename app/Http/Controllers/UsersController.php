@@ -21,9 +21,12 @@ class UsersController extends Controller
     public function addUser(Request $req){
         //dd($req->all());
         //dd('hwsapi');
+
+        $response = array();
+
          $rules = [
-            // 'name' => 'min:3|alpha',
-            // 'user_name' => 'min:3|alpha_num|unique:users',
+             'name' => 'min:3|alpha',
+             'user_name' => 'min:3|alpha_num|unique:users',
             // 'email' => 'email|unique:users',
             // 'password' => 'required',
             // 'dob' => 'date',
@@ -37,12 +40,24 @@ class UsersController extends Controller
         $validator = Validator::make($req->all(), $rules, $messages);
 
         if(!empty($validator->messages()->all())){
-            dd($validator->messages()->all());
+            $response['status'] = 400;
+            $response['message'] = 'Errors! in the form';            
+            $response['errors'] = $validator->messages()->all();
+            dd($response);
+            return json_encode($response);
         }
 
         $user = new User;
 
-        return $user->addUser($req->all());
+        $adduser = $user->addUser($req->all());
+
+        if(!empty($adduser)){
+            $response['status'] = 200;
+            $response['message'] = 'User added successfully!';
+            $response['data'] = [];
+
+            return json_encode($response);
+        }
     }
 
     public function getUsers(){
