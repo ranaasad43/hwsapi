@@ -11,7 +11,7 @@ class User extends Model
     protected $primaryKey = 'id';
 
     public function addUser($values){
-
+    	//dd('usermodel');
     	DB::table($this->table)->insert($values);
     	dd('success');
     }

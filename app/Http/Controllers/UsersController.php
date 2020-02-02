@@ -20,6 +20,7 @@ class UsersController extends Controller
 
     public function addUser(Request $req){
         //dd($req->all());
+        //dd('hwsapi');
          $rules = [
             // 'name' => 'min:3|alpha',
             // 'user_name' => 'min:3|alpha_num|unique:users',
@@ -42,5 +43,23 @@ class UsersController extends Controller
         $user = new User;
 
         return $user->addUser($req->all());
+    }
+
+    public function getUsers(){
+        $response = array();
+        $data = User::get();
+        $response['status'] = !empty($data) ? 200 : 204;
+        $response['data'] = $data;
+        dd($response);
+        return json_encode($response); 
+    }
+
+    public function getUser($id){
+        $response = array();
+        $data = User::find($id);
+        $response['status'] = !empty($data) ? 200 : 204;
+        $response['data'] = $data;
+        dd($response);
+        return json_encode($response); 
     }
 }
