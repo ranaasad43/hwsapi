@@ -43,7 +43,7 @@ class UsersController extends Controller
             $response['status'] = 400;
             $response['message'] = 'Errors! in the form';            
             $response['errors'] = $validator->messages()->all();
-            dd($response);
+            //dd($response);
             return json_encode($response);
         }
 
@@ -76,5 +76,27 @@ class UsersController extends Controller
         $response['data'] = $data;
         dd($response);
         return json_encode($response); 
+    }
+
+    public function login(Request $req){
+         //dd($req->all());
+        $email = $req->get('email');
+        //$pass = $req->get('password');
+        $pass = 123456;
+
+        $response = array();
+        $params = array();
+
+        $params['email'] = !empty($email) ? $email : '';
+        $params['password'] = !empty($pass) ? $pass : '';
+
+        $data = User::where($params)->first();
+        
+        $response['status'] = !empty($data) ? 200 : 204;
+        $response['data'] = $data;
+
+        //dd($response);
+        return json_encode($response);
+        
     }
 }

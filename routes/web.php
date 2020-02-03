@@ -21,4 +21,5 @@ $router->group(['middleware' => ['apiAuth']],function() use ($router){
 	$router->get('/user/{id}','UsersController@getUser');
 	$router->delete('/user/{id}','UsersController@destroyUser');
 	$router->put('/user/{id}','UsersController@updateUser');
+	$router->get('/userLogin','UsersController@login');
 });
