@@ -25,4 +25,5 @@
 	$router->get('/genres','GenresController@getGenres');
 	$router->get('/studios','StudiosController@getStudios');
 	$router->get('/addfilm','FilmsController@addFilm');
+	$router->post('/addfilm','FilmsController@addFilm');
 //});

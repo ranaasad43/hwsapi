@@ -20,13 +20,13 @@ class FilmsController extends Controller
 
     public function addFilm(Request $req){
         //dd($req->all());
-        dd('addfilm');
+        //dd('addfilm');
 
         $response = array();
 
          $rules = [
              //'name' => 'min:3|alpha',
-             'user_name' => 'min:3|alpha_num|unique:users',
+        //     'user_name' => 'min:3|alpha_num|unique:users',
             // 'email' => 'email|unique:users',
             // 'password' => 'required',
             // 'dob' => 'date',
@@ -43,17 +43,17 @@ class FilmsController extends Controller
             $response['status'] = 400;
             $response['message'] = 'Errors! in the form';            
             $response['errors'] = $validator->messages()->all();
-            //dd($response);
+            dd($response);
             return json_encode($response);
         }
 
-        $user = new User;
+        $film = new Film;
 
-        $adduser = $user->addUser($req->all());
+        $addfilm = $film->addfilm($req->all());
 
         if(!empty($adduser)){
             $response['status'] = 200;
-            $response['message'] = 'User added successfully!';
+            $response['message'] = 'Film added successfully!';
             $response['data'] = [];
 
             return json_encode($response);
