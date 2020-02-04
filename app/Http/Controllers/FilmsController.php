@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Http\Models\Film;
 use Validator;
 
-class UsersController extends Controller
+class FilmsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -18,9 +18,9 @@ class UsersController extends Controller
         //
     }
 
-    public function addUser(Request $req){
+    public function addFilm(Request $req){
         //dd($req->all());
-        //dd('hwsapi');
+        dd('addfilm');
 
         $response = array();
 

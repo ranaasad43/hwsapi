@@ -15,11 +15,14 @@
 //     //return $router->app->version();
 //     echo "hello";
 // });
-$router->group(['middleware' => ['apiAuth']],function() use ($router){
+//$router->group(['middleware' => ['apiAuth']],function() use ($router){
 	$router->post('/adduser','UsersController@addUser');
 	$router->get('/users','UsersController@getUsers');
 	$router->get('/user/{id}','UsersController@getUser');
 	$router->delete('/user/{id}','UsersController@destroyUser');
 	$router->put('/user/{id}','UsersController@updateUser');
 	$router->get('/userLogin','UsersController@login');
-});
+	$router->get('/genres','GenresController@getGenres');
+	$router->get('/studios','StudiosController@getStudios');
+	$router->get('/addfilm','FilmsController@addFilm');
+//});
