@@ -51,11 +51,11 @@ class FilmsController extends Controller
 
         $addfilm = $film->addfilm($req->all());
 
-        if(!empty($adduser)){
+        if(!empty($addfilm)){
             $response['status'] = 200;
             $response['message'] = 'Film added successfully!';
             $response['data'] = [];
-
+            //dd($response);
             return json_encode($response);
         }
     }

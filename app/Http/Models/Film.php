@@ -22,7 +22,7 @@ class Film extends Model
     	];
     	//dd($data);
     	return DB::table($this->table)->insert($data);
-    	dd('success');
+    	//dd('success');
     }
     
     
