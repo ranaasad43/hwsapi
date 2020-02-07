@@ -23,7 +23,7 @@ class GenresController extends Controller
         $data = Genre::get();
         $response['status'] = !empty($data) ? 200 : 204;
         $response['data'] = $data;
-        dd($response);
+        //dd($response);
         return json_encode($response); 
     }
 
