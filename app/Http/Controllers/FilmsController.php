@@ -78,14 +78,15 @@ class FilmsController extends Controller
 		return json_encode($response); 
 	}
 
-	// public function getUser($id){
-	// 	$response = array();
-	// 	$data = User::find($id);
-	// 	$response['status'] = !empty($data) ? 200 : 204;
-	// 	$response['data'] = $data;
-	// 	dd($response);
-	// 	return json_encode($response); 
-	// }
+	public function getFilm($id){
+		//dd("api");
+		$response = array();
+		$data = Film::find($id);
+		$response['status'] = !empty($data) ? 200 : 204;
+		$response['data'] = $data;
+		//dd($response);
+		return json_encode($response); 
+	}
 
 	// public function login(Request $req){
 	// 	 //dd($req->all());
