@@ -70,6 +70,9 @@ class FilmsController extends Controller
 			return $q->where('studio_id','=',$req->get('studio_id') );
 		})->when(!empty($req->get('featured')),function($q)use($req){
 			return $q->where('featured','=',1);
+		})->when(!empty($req->get('search')),function($q)use($req){
+			$search_str = $req->get('search');
+			return $q->where('title','like',"%$search_str%");
 		})->get();
 		//dd($data);
 		$response['status'] = !empty($data) ? 200 : 204;
