@@ -11,7 +11,7 @@ class Film extends Model
     protected $primaryKey = 'id';
 
     public function addfilm($values){
-    	//dd('model');
+    	dd('model');
     	//dd($values);
     	$data = [
     		'title' => $values['title'],

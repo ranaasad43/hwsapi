@@ -19,9 +19,9 @@ class FilmsController extends Controller
 	}
 
 	public function addFilm(Request $req){
-		//dd($req->all());
-		//dd('addfilm');
-
+		//dd($req->file('file'));
+		//dd($req->file('file')->getClientOriginalExtension());
+		//dd(storage_path());
 		$response = array();
 
 		 $rules = [
@@ -46,6 +46,28 @@ class FilmsController extends Controller
 			dd($response);
 			return json_encode($response);
 		}
+
+		if(!is_dir(resource_path('posters'))){
+    		mkdir(resource_path('/posters'));
+    	}
+
+    	if(!is_dir(resource_path('/posters/'.$req->get('title')))){
+    		mkdir(resource_path('/posters/'.$req->get('title')));
+    	}   	
+
+    	$image = $req->file('file');
+    	// $wm = Image::make(public_path('/images/film.png'))->resize(50,50);
+
+    	// $image->insert($wm, 'bottom-left');
+
+    	$directory = resource_path('/posters/'.$req->get('title'));
+
+    	// $image_name = $req->get('title').'.'.$req->file('file')->getClientOriginalExtension();
+
+    	$image_name = $req->get('filename');
+    	//dd($image_name);
+
+    	$image->move($directory,$image_name);
 
 		$film = new Film;
 
