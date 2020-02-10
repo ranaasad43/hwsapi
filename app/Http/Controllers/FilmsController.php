@@ -113,25 +113,44 @@ class FilmsController extends Controller
 		return json_encode($response); 
 	}
 
-	// public function login(Request $req){
-	// 	 //dd($req->all());
-	// 	$email = $req->get('email');
-	// 	$pass = $req->get('password');
-	// 	//$pass = 123456;
+	public function getGenre($id,Request $req){
+        //dd($id);
+        $response = array();
+        $data = Film::when(!empty($id),function($q)use($id){
+			return $q->where('genre_id','=',$id);
+		})->get();
+        $response['status'] = !empty($data) ? 200 : 204;
+        $response['data'] = $data;
+        //dd($response);
+        return json_encode($response);    
+    }
 
-	// 	$response = array();
-	// 	$params = array();
+    public function getStudios($id,Request $req){
+        //dd($id);
+        $response = array();
+        $data = Film::when(!empty($id),function($q)use($id){
+			return $q->where('studio_id','=',$id);
+		})->get();
+        $response['status'] = !empty($data) ? 200 : 204;
+        $response['data'] = $data;
+        //dd($response);
+        return json_encode($response);    
+    }
 
-	// 	$params['email'] = !empty($email) ? $email : '';
-	// 	$params['password'] = !empty($pass) ? $pass : '';
-
-	// 	$data = User::where($params)->first();
-		
-	// 	$response['status'] = !empty($data) ? 200 : 204;
-	// 	$response['data'] = $data;
-
-	// 	//dd($response);
-	// 	return json_encode($response);
-		
-	// }
+    public function showFilms(){
+		//dd('api');
+		$response = array();
+		$data = '';
+		$data = Film::all();
+		//dd($data);
+		$response['status'] = !empty($data) ? 200 : 204;
+		$response['data'] = $data;
+		//dd($response);
+		return json_encode($response); 
+	}
 }
+
+
+
+
+

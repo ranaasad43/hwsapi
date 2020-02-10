@@ -27,5 +27,15 @@ class GenresController extends Controller
         return json_encode($response); 
     }
 
+    // public function getGenre($id,Request $req){
+    //     //dd($id);
+    //     $response = array();
+    //     $data = Genre::where('genre_id','=',$id);
+    //     $response['status'] = !empty($data) ? 200 : 204;
+    //     $response['data'] = $data;
+    //     dd($response);
+    //     return json_encode($response);    
+    // }
+
 
 }
