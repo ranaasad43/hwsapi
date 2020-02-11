@@ -19,6 +19,7 @@ class FilmsController extends Controller
 	}
 
 	public function addFilm(Request $req){
+		//dd($req->all());
 		//dd($req->file('file'));
 		//dd($req->file('file')->getClientOriginalExtension());
 		//dd(storage_path());
@@ -47,27 +48,27 @@ class FilmsController extends Controller
 			return json_encode($response);
 		}
 
-		if(!is_dir(resource_path('posters'))){
-    		mkdir(resource_path('/posters'));
-    	}
+		// if(!is_dir(resource_path('posters'))){
+  //   		mkdir(resource_path('/posters'));
+  //   	}
 
-    	if(!is_dir(resource_path('/posters/'.$req->get('title')))){
-    		mkdir(resource_path('/posters/'.$req->get('title')));
-    	}   	
+  //   	if(!is_dir(resource_path('/posters/'.$req->get('title')))){
+  //   		mkdir(resource_path('/posters/'.$req->get('title')));
+  //   	}   	
 
-    	$image = $req->file('file');
+    	//$image = $req->file('file');
     	// $wm = Image::make(public_path('/images/film.png'))->resize(50,50);
 
     	// $image->insert($wm, 'bottom-left');
 
-    	$directory = resource_path('/posters/'.$req->get('title'));
+    	//$directory = resource_path('/posters/'.$req->get('title'));
 
     	// $image_name = $req->get('title').'.'.$req->file('file')->getClientOriginalExtension();
 
-    	$image_name = $req->get('filename');
+    	//$image_name = $req->get('filename');
     	//dd($image_name);
 
-    	$image->move($directory,$image_name);
+    	//$image->move($directory,$image_name);
 
 		$film = new Film;
 
@@ -147,6 +148,21 @@ class FilmsController extends Controller
 		$response['data'] = $data;
 		//dd($response);
 		return json_encode($response); 
+	}
+
+	public function destroy($id){
+		//dd('api destroy'.$id);
+		$response = array();
+    $data = Film::find($id);
+    if($data->delete()){
+    	$response['status'] = 200 ;
+    	$response['message'] ='film deleted';    		
+    }else{
+    	$response['status'] = 204 ;
+    	$response['message'] ='error while deleting';
+    };    
+    //dd($response);
+    return json_encode($response);
 	}
 }
 

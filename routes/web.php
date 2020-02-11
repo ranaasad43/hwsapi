@@ -31,4 +31,5 @@
 	$router->get('/getgenre/{id}','FilmsController@getGenre');
 	$router->get('/getstudios/{id}','FilmsController@getStudios');
 	$router->get('/showfilms','FilmsController@showFilms');
+	$router->delete('/delfilm/{id}','FilmsController@destroy');
 //});
