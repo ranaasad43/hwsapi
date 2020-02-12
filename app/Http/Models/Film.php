@@ -19,11 +19,32 @@ class Film extends Model
     		'genre_id' => $values['genre'],
     		'studio_id' => $values['studio'],
     		'plot' => $values['plot'],
+            'featured' => $values['featured'],
             'poster' => $values['poster']    		
     	];
     	//dd($data);
     	return DB::table($this->table)->insert($data);
     	//dd('success');
+    }
+
+    public function updatefilm($values,$id){
+        //dd($id);
+        //dd($values);
+        $data = [
+            'title' => $values['title'],
+            'year' => $values['year'],
+            'genre_id' => $values['genre'],
+            'studio_id' => $values['studio'],
+            'plot' => $values['plot'],
+            'featured' => $values['featured'],
+            'poster' => $values['poster']           
+        ];
+        //dd($data);
+        return DB::table($this->table)
+                ->where('id', $id)
+                ->update($data);
+        // return DB::table($this->table)->insert($data);
+        // //dd('success');
     }
     
     

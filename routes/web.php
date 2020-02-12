@@ -32,4 +32,7 @@
 	$router->get('/getstudios/{id}','FilmsController@getStudios');
 	$router->get('/showfilms','FilmsController@showFilms');
 	$router->delete('/delfilm/{id}','FilmsController@destroy');
+	$router->post('/updatefilm/{id}','FilmsController@update');
 //});
+//$router->get('/films','FilmsController@getFilms');
+//$router->post('/films','FilmsController@getFilms');

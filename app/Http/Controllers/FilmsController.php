@@ -164,6 +164,23 @@ class FilmsController extends Controller
     //dd($response);
     return json_encode($response);
 	}
+	// public function update(Request $req){
+	// 	dd($req->all());
+	// }
+	public function update(Request $req,$id){		
+		//dd($req->all());
+		$film = Film::find($id);
+		$updatefilm = $film->updatefilm($req->all(),$id);
+
+		if(!empty($updatefilm)){
+			$response['status'] = 200;
+			$response['message'] = 'Film updated successfully!';
+			$response['data'] = [];
+			//dd($response);
+			return json_encode($response);
+		}
+	}
+
 }
 
 
