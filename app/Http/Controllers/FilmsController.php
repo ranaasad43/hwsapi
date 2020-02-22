@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Models\Film;
 use Validator;
+use DB;
 
 class FilmsController extends Controller
 {
@@ -169,14 +170,55 @@ class FilmsController extends Controller
 	// }
 	public function update(Request $req,$id){		
 		//dd($req->all());
-		$film = Film::find($id);
-		$updatefilm = $film->updatefilm($req->all(),$id);
+		$rules = [
+         'title' =>'required',
+         'year' => 'required',
+         'genre' => 'required',
+         'studio' => 'required',
+         'plot' => 'required',
+         'poster' => 'required',
+    ];
+
+    $msgs = [
+      'name.min' => 'title should be minum 3 letters'
+    ];
+
+    $validator = Validator::make($req->all(),$rules,$msgs);
+    //dd($validator->messages()->all());
+    if(!empty($validator->messages()->all())){
+      $response['status'] = 400;
+      $response['message'] = 'Errors! in the form';            
+      $response['errors'] = $validator->messages()->all();
+      //dd($response);
+      return json_encode($response);
+    }
+    //dd($req->all());
+    //dd($id);
+		$film = new Film;
+		$data = [
+	      'title' => $req->title,
+	      'year' => $req->year,
+	      'genre_id' => $req->genre,
+	      'studio_id' => $req->studio,
+	      'plot' => $req->plot,
+	      'featured' => $req->featured,
+	      'poster' => $req->poster           
+	  ];
+
+	  //dd($data);
+	  //$update = DB::table('films')->where('id', $id)->update($data);
+	  
+	  $updatefilm = $film->updatefilm($req->all(),$id);
 
 		if(!empty($updatefilm)){
 			$response['status'] = 200;
 			$response['message'] = 'Film updated successfully!';
 			$response['data'] = [];
-			//dd($response);
+			return json_encode($response);
+		}else{
+			$response['status'] = 400;
+			$response['message'] = 'error while updating';
+			$response['data'] = [];
 			return json_encode($response);
 		}
 	}

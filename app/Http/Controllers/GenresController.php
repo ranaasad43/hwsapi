@@ -21,9 +21,10 @@ class GenresController extends Controller
     public function getGenres(Request $req){
         $response = array();
         $data = Genre::get();
+        //dd($data);
         $response['status'] = !empty($data) ? 200 : 204;
         $response['data'] = $data;
-        //dd($response);
+        //dd($response['data']);
         return json_encode($response); 
     }
 
